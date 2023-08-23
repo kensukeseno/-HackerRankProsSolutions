@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class SinglyLinkedListMergeLists {
+public class FindMergePointOfTwoLists {
 
 	static class SinglyLinkedListNode {
 		public int data;
@@ -51,7 +51,7 @@ public class SinglyLinkedListMergeLists {
 		}
 	}
 
-	// Complete the mergeLists function below.
+	// Complete the findMergeNode function below.
 
 	/*
 	 * For your reference:
@@ -62,52 +62,32 @@ public class SinglyLinkedListMergeLists {
 	 * }
 	 *
 	 */
-	 static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+	 static int findMergeNode(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
 
-//		 set current nodes of each LinkedList
+		 //    	Prepare mark node
+		 SinglyLinkedListNode markNode = new SinglyLinkedListNode(1);
+
+		 int mergePoint = 0;
+
 		 SinglyLinkedListNode currentNode1 = head1;
 		 SinglyLinkedListNode currentNode2 = head2;
-		 
-		 SinglyLinkedListNode resultLinkedListHead = null;
-		 
-//		 set resultLinkedList head
-		 if(head1 == null && head2 == null) {
-		 }else if(head1 == null){
-			 resultLinkedListHead = head2;
-		 }else if(head2 == null){
-			 resultLinkedListHead = head1;
-		 }else {
-//			 set result LinkedList to null;
-			 SinglyLinkedListNode currrentResulstNode = null;
-			 
-			 if(head1.data < head2.data) {
-				 currrentResulstNode = head1;
-				 currentNode1 = currentNode1.next;
-				 resultLinkedListHead = head1;
-			 }else {
-				 currrentResulstNode = head2;
-				 currentNode2 = currentNode2.next;
-				 resultLinkedListHead = head2;
-			 }
-			 while (currentNode1 != null && currentNode2 != null) {
-				 if(currentNode1.data < currentNode2.data) {
-					 currrentResulstNode.next = currentNode1;
-					 currentNode1 = currentNode1.next;
-					 currrentResulstNode =  currrentResulstNode.next;
-				 }else {
-					 currrentResulstNode.next = currentNode2;
-					 currentNode2 = currentNode2.next;
-					 currrentResulstNode =  currrentResulstNode.next;
-				 }
-			 }
-			 if(currentNode1 != null) {
-				 currrentResulstNode.next = currentNode1;
-			 }else if(currentNode2 != null){
-				 currrentResulstNode.next = currentNode2;				 
-			 }
+		 SinglyLinkedListNode nextNode1;    	
+		 //    	convert next node of every node in LinkedList1 to markNode
+		 while(currentNode1 != null) {
+			 nextNode1 = currentNode1.next;
+			 currentNode1.next = markNode;
+			 currentNode1 = nextNode1;
 		 }
-		 
-		 return resultLinkedListHead;
+
+		 //    	Return data when LinkedList2 hits merge point
+		 while(currentNode2 != null) {
+			 if(currentNode2.next == markNode) {
+				 mergePoint = currentNode2.data;
+				 break;
+			 }
+			 currentNode2 = currentNode2.next;
+		 }    	
+		 return mergePoint;
 	 }
 
 	 private static final Scanner scanner = new Scanner(System.in);
@@ -119,6 +99,9 @@ public class SinglyLinkedListMergeLists {
 		 scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
 		 for (int testsItr = 0; testsItr < tests; testsItr++) {
+			 int index = scanner.nextInt();
+			 scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
 			 SinglyLinkedList llist1 = new SinglyLinkedList();
 
 			 int llist1Count = scanner.nextInt();
@@ -143,9 +126,26 @@ public class SinglyLinkedListMergeLists {
 				 llist2.insertNode(llist2Item);
 			 }
 
-			 SinglyLinkedListNode llist3 = mergeLists(llist1.head, llist2.head);
+			 SinglyLinkedListNode ptr1 = llist1.head;
+			 SinglyLinkedListNode ptr2 = llist2.head;
 
-			 printSinglyLinkedList(llist3, " ", bufferedWriter);
+			 for (int i = 0; i < llist1Count; i++) {
+				 if (i < index) {
+					 ptr1 = ptr1.next;
+				 }
+			 }
+
+			 for (int i = 0; i < llist2Count; i++) {
+				 if (i != llist2Count-1) {
+					 ptr2 = ptr2.next;
+				 }
+			 }
+
+			 ptr2.next = ptr1;
+
+			 int result = findMergeNode(llist1.head, llist2.head);
+
+			 bufferedWriter.write(String.valueOf(result));
 			 bufferedWriter.newLine();
 		 }
 

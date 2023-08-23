@@ -11,53 +11,41 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-class ResultRotateLeft {
+class ResultReverseArray {
 
     /*
-     * Complete the 'rotateLeft' function below.
+     * Complete the 'reverseArray' function below.
      *
      * The function is expected to return an INTEGER_ARRAY.
-     * The function accepts following parameters:
-     *  1. INTEGER d
-     *  2. INTEGER_ARRAY arr
+     * The function accepts INTEGER_ARRAY a as parameter.
      */
 
-    public static List<Integer> rotateLeft(int d, List<Integer> arr) {
+    public static List<Integer> reverseArray(List<Integer> a) {
     // Write your code here
-    	
-    	List<Integer> result = new ArrayList<>();
-    	
-    	for(int i = d; i < arr.size(); i++ ) {
-    		result.add(arr.get(i));
+    	List<Integer> reversedArray = new ArrayList<>();
+    	for(int i = 0; i < a.size(); i++) {
+    		reversedArray.add(a.get(a.size() - i-1));
     	}
-    	for(int i = 0; i < d; i++) {
-    		result.add(arr.get(i));
-    	}
-    	
-    	return result;
+    	return reversedArray;
     }
 
 }
 
-public class RotateLeft {
+public class ArraysDS {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
-
-        int n = Integer.parseInt(firstMultipleInput[0]);
-
-        int d = Integer.parseInt(firstMultipleInput[1]);
+        int arrCount = Integer.parseInt(bufferedReader.readLine().trim());
 
         List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
             .map(Integer::parseInt)
             .collect(toList());
 
-        List<Integer> result = ResultRotateLeft.rotateLeft(d, arr);
+        List<Integer> res = ResultReverseArray.reverseArray(arr);
 
         bufferedWriter.write(
-            result.stream()
+            res.stream()
                 .map(Object::toString)
                 .collect(joining(" "))
             + "\n"

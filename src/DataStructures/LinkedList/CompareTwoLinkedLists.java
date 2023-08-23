@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class SinglyLinkedListRemoveDuplicates {
+public class CompareTwoLinkedLists {
 
 	static class SinglyLinkedListNode {
 		public int data;
@@ -51,13 +51,7 @@ public class SinglyLinkedListRemoveDuplicates {
 		}
 	}
 
-
-	/*
-	 * Complete the 'removeDuplicates' function below.
-	 *
-	 * The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
-	 * The function accepts INTEGER_SINGLY_LINKED_LIST llist as parameter.
-	 */
+	// Complete the compareLists function below.
 
 	/*
 	 * For your reference:
@@ -68,55 +62,73 @@ public class SinglyLinkedListRemoveDuplicates {
 	 * }
 	 *
 	 */
+	static boolean compareLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+		//    	set comparision result flag to true
+		boolean resultFlag = true;
+		SinglyLinkedListNode currentNode1 = head1;
+		SinglyLinkedListNode currentNode2 = head2;
 
-	public static SinglyLinkedListNode removeDuplicates(SinglyLinkedListNode llist) {
-		// Write your code here
-		//    	Compare two nodes in a row
-
-		//    	Set the first two nodes to variables
-		SinglyLinkedListNode fstNode = llist;
-		if(llist == null || llist.next == null) {
-			return llist;
-		}else{
-			SinglyLinkedListNode scdNode = llist.next;
-			//			if values of each node are the same, delete second node
-			while(scdNode != null) {
-				if(fstNode.data == scdNode.data) {
-					fstNode.next = scdNode.next;
+		if(head1 == null && head2 == null) {
+		}else if(head1 == null && head2 != null){
+			resultFlag = false;
+		}else if(head1 != null && head2 == null){
+			resultFlag = false;
+		}else {
+			while(currentNode1 != null && currentNode2 != null) {
+				if(currentNode1.data == currentNode2.data) {
+					currentNode1 = currentNode1.next;
+					currentNode2 = currentNode2.next;
+					continue;
 				}else {
-					fstNode = fstNode.next;
+					break;
 				}
-				scdNode = fstNode.next;
+			}
+			if(currentNode1 == null && currentNode2 == null) {
+				resultFlag = true;
+			}else{
+				resultFlag = false;
 			}
 		}
-		return llist;
-	}
+		return resultFlag;
 
+	}
 
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
 		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-		int t = scanner.nextInt();
+		int tests = scanner.nextInt();
 		scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-		for (int tItr = 0; tItr < t; tItr++) {
-			SinglyLinkedList llist = new SinglyLinkedList();
+		for (int testsItr = 0; testsItr < tests; testsItr++) {
+			SinglyLinkedList llist1 = new SinglyLinkedList();
 
-			int llistCount = scanner.nextInt();
+			int llist1Count = scanner.nextInt();
 			scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-			for (int i = 0; i < llistCount; i++) {
-				int llistItem = scanner.nextInt();
+			for (int i = 0; i < llist1Count; i++) {
+				int llist1Item = scanner.nextInt();
 				scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-				llist.insertNode(llistItem);
+				llist1.insertNode(llist1Item);
 			}
 
-			SinglyLinkedListNode llist1 = removeDuplicates(llist.head);
+			SinglyLinkedList llist2 = new SinglyLinkedList();
 
-			printSinglyLinkedList(llist1, " ", bufferedWriter);
+			int llist2Count = scanner.nextInt();
+			scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+			for (int i = 0; i < llist2Count; i++) {
+				int llist2Item = scanner.nextInt();
+				scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+				llist2.insertNode(llist2Item);
+			}
+
+			boolean result = compareLists(llist1.head, llist2.head);
+
+			bufferedWriter.write(String.valueOf(result ? 1 : 0));
 			bufferedWriter.newLine();
 		}
 

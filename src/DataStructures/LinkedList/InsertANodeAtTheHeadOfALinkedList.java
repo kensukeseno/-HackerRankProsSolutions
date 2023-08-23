@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class SinglyLinkedListHead {
+public class InsertANodeAtTheHeadOfALinkedList {
 
 	static class SinglyLinkedListNode {
 		public int data;

@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class SinglyLinkedListGetNode {
+public class GetNodeValue {
 
     static class SinglyLinkedListNode {
         public int data;

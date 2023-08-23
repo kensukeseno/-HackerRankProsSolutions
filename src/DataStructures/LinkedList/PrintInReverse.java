@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class SinglyLinkedListReversePrint {
+public class PrintInReverse {
 
     static class SinglyLinkedListNode {
         public int data;

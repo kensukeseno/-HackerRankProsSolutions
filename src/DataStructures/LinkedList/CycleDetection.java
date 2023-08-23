@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class SinglyLinkedListCompareLists {
+public class CycleDetection {
 
 	static class SinglyLinkedListNode {
 		public int data;
@@ -51,7 +51,7 @@ public class SinglyLinkedListCompareLists {
 		}
 	}
 
-	// Complete the compareLists function below.
+	// Complete the hasCycle function below.
 
 	/*
 	 * For your reference:
@@ -62,35 +62,23 @@ public class SinglyLinkedListCompareLists {
 	 * }
 	 *
 	 */
-	static boolean compareLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
-		//    	set comparision result flag to true
-		boolean resultFlag = true;
-		SinglyLinkedListNode currentNode1 = head1;
-		SinglyLinkedListNode currentNode2 = head2;
-
-		if(head1 == null && head2 == null) {
-		}else if(head1 == null && head2 != null){
-			resultFlag = false;
-		}else if(head1 != null && head2 == null){
-			resultFlag = false;
-		}else {
-			while(currentNode1 != null && currentNode2 != null) {
-				if(currentNode1.data == currentNode2.data) {
-					currentNode1 = currentNode1.next;
-					currentNode2 = currentNode2.next;
-					continue;
-				}else {
+	static boolean hasCycle(SinglyLinkedListNode head) {
+		//    	a LinkedList has a cycle, if list size exceed 1000
+		int count = 0;
+		boolean result = false;
+		SinglyLinkedListNode currentNode = head;
+		if(head != null) {
+			while(currentNode != null) {
+				count++;
+				currentNode = currentNode.next;
+				if(count > 1000) {
+					result = true;
 					break;
 				}
 			}
-			if(currentNode1 == null && currentNode2 == null) {
-				resultFlag = true;
-			}else{
-				resultFlag = false;
-			}
-		}
-		return resultFlag;
 
+		}
+		return result;
 	}
 
 	private static final Scanner scanner = new Scanner(System.in);
@@ -102,31 +90,37 @@ public class SinglyLinkedListCompareLists {
 		scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
 		for (int testsItr = 0; testsItr < tests; testsItr++) {
-			SinglyLinkedList llist1 = new SinglyLinkedList();
-
-			int llist1Count = scanner.nextInt();
+			int index = scanner.nextInt();
 			scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-			for (int i = 0; i < llist1Count; i++) {
-				int llist1Item = scanner.nextInt();
-				scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+			SinglyLinkedList llist = new SinglyLinkedList();
 
-				llist1.insertNode(llist1Item);
-			}
-
-			SinglyLinkedList llist2 = new SinglyLinkedList();
-
-			int llist2Count = scanner.nextInt();
+			int llistCount = scanner.nextInt();
 			scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-			for (int i = 0; i < llist2Count; i++) {
-				int llist2Item = scanner.nextInt();
+			for (int i = 0; i < llistCount; i++) {
+				int llistItem = scanner.nextInt();
 				scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-				llist2.insertNode(llist2Item);
+				llist.insertNode(llistItem);
 			}
 
-			boolean result = compareLists(llist1.head, llist2.head);
+			SinglyLinkedListNode extra = new SinglyLinkedListNode(-1);
+			SinglyLinkedListNode temp = llist.head;
+
+			for (int i = 0; i < llistCount; i++) {
+				if (i == index) {
+					extra = temp;
+				}
+
+				if (i != llistCount-1) {
+					temp = temp.next;
+				}
+			}
+
+			temp.next = extra;
+
+			boolean result = hasCycle(llist.head);
 
 			bufferedWriter.write(String.valueOf(result ? 1 : 0));
 			bufferedWriter.newLine();
