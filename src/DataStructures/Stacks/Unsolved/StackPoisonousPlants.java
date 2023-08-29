@@ -88,6 +88,7 @@ class Result {
 //			}
 //		}
 //		return maxCounter;
+		return 1;
 	}
 
 }

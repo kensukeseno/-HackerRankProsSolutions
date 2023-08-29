@@ -5,8 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 import java.util.stream.IntStream;
 
 class Result {
@@ -20,42 +19,51 @@ class Result {
 
 	public static String isBalanced(String s) {
 		// Write your code here
-		//    	Assign numbers that sum to zero to each pair of brakets and put it to list
-		List<Integer> bracketsStack = new ArrayList<>();
-		for(int i = 0; i < s.length(); i++) {
-			switch(s.charAt(i)) {
-			case ('{'): bracketsStack.add(1);
-			break;
-			case ('}'): bracketsStack.add(-1);
-			break;
-			case ('['): bracketsStack.add(2);
-			break;	
-			case (']'): bracketsStack.add(-2);
-			break;
-			case ('('): bracketsStack.add(3);
-			break;
-			case (')'): bracketsStack.add(-3);
-			break;
+		String yesNo = "YES";
+
+		Stack<Character> openingBrakcet = new Stack<>();
+		boolean breakFlag = false;
+
+		for(int i = 0; i < s.length(); i++){
+			//			Push opening bracket into Stack
+			char bracket = s.charAt(i);
+			//			if bracket is opening bracket, push to stack
+			if(bracket == '{' || bracket == '(' || bracket == '[') {
+				openingBrakcet.push(bracket);
+				//			If not, compare top of stack and bracket. If they make a pair, string is balanced. 
+				//			And pop one on top out.
+			}else {
+				if(openingBrakcet.empty()) {
+					yesNo = "NO";
+					breakFlag = true;
+				}else {
+					switch (openingBrakcet.peek()) {
+					case ('{'):
+						yesNo = bracket == '}' ? "YES" : "NO";
+					openingBrakcet.pop();
+					break;
+					case ('('):
+						yesNo = bracket == ')' ? "YES" : "NO";
+					openingBrakcet.pop();
+					break;
+					case ('['):
+						yesNo = bracket == ']' ? "YES" : "NO";
+					openingBrakcet.pop();
+					break;
+					}}
+
+				if(yesNo =="NO") {
+					breakFlag = true;
+					break;
+				}
 			}
 		}
 
-		//    	Add numbers on other side of list
-		String yesNo = "YES";
-		if(bracketsStack.size() % 2 == 1) {
+		//		If loop was not ended in the middle, and stack is not empty, string is not balenced
+		if(!breakFlag && !openingBrakcet.empty()) {
 			yesNo = "NO";
-		}else {
-			for(int i = 0; i < bracketsStack.size() / 2; i++) {
-				if(bracketsStack.get(i) < 0) {
-					yesNo = "NO";
-					break;
-				}
-				int sum = bracketsStack.get(i) + bracketsStack.get(bracketsStack.size() - 1 - i);
-				if(sum != 0) {
-					yesNo = "NO";
-					break;
-				}
-			}
 		}
+
 		return yesNo;
 	}
 
