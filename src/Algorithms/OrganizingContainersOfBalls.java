@@ -8,7 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -23,20 +25,35 @@ class ResultOrganizingContainersOfBalls {
 
     public static String organizingContainers(List<List<Integer>> container) {
     // Write your code here
-//    	Let's think about a spefific container.
-//    	Denote the number of balls that have the number of the container and that are originally in a deffirent container WB (wrong at the beggining).
-//    	Denote the number of balls that do not have the number of the container and that are originally in the container BD (balls with a different number).
-//    	If WB and BD are the same, for the container it is possible to collect all balls with the number by swap operations.
-    	
-    	List<Integer> wbList = new ArrayList<>();
-    	List<Integer> bdList = new ArrayList<>();
-    	
+    	String answer = "Possible";
+    	List<Integer> rowSums = new ArrayList<>();
+    	List<Integer> lineSums = new ArrayList<>();;
+
     	for(int i = 0; i < container.size(); i++) {
-    		wbList.add(container.get(i).stream().reduce(0, Integer::sum) - container.get(i).get(i));
+        	int lineSume = 0;    		
+        	int rowSume = 0;
+    		for(int c = 0; c < container.size(); c++) {
+    			lineSume += container.get(c).get(i);
+    			rowSume += container.get(i).get(c);
+    		}
+    		rowSums.add(rowSume);
+    		lineSums.add(lineSume);
     	}
     	
-    	return "";
-
+    	for(int i = 0; i < container.size(); i++) {
+    		boolean evaluation = false;
+    		for(int c = 0; c < container.size(); c++) {
+    			if(rowSums.get(i).equals(lineSums.get(c))) {
+    				evaluation = true;
+    			}
+    		}
+    		if(!evaluation) {
+    			answer = "Impossible";
+    			break;
+    		}
+    	}
+    	
+    	return answer;
     }
 
 }
