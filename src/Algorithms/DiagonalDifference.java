@@ -22,16 +22,20 @@ class ResultDiagonalDifference {
 
     public static int diagonalDifference(List<List<Integer>> arr) {
     // Write your code here
+//    	Prepare variable to store each sum of left to right and right to left
     	int leftToRight = 0;
     	int rightToLeft = 0;
     	
+//    	Get the length of one dimention
     	int n = arr.size();
-    	
+ 
+//    	Calculate each sum
     	for(int i = 0; i < n; i++) {
     		leftToRight += arr.get(i).get(i);
     		rightToLeft += arr.get(n - i -1).get(i);
     	}
     	
+//    	Calculate the absolute difference
     	int diff =  Math.abs(leftToRight - rightToLeft);
 
     	return diff;

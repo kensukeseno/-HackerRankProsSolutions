@@ -19,6 +19,7 @@ class ResultTimeConversion {
     	String simbol = s.substring(8, 10);
     	String mTime = s.substring(0, 8);
     	
+    	
     	if(simbol.equals("PM")) {
         	int hh = Integer.parseInt(s.substring(0, 2));
         	if(hh != 12) hh += 12;
@@ -27,7 +28,6 @@ class ResultTimeConversion {
     		if(s.substring(0, 2).equals("12"))
     			mTime = mTime.replaceFirst("[0-9][0-9]", "00");
     	}
-    	
     	
     	return mTime;
     }

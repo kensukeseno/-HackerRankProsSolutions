@@ -27,36 +27,20 @@ class ResultArrayManipulation {
 
     public static long arrayManipulation(int n, List<List<Integer>> queries) {
     // Write your code here
-//    	Create an array with length of n for adding operations
+    	/*
+    	 * Firstly, go through all operations and add numbers to values of an array.
+    	 * Secondly, find the max number.
+    	 */
+    	
+//    	Create an array with length of n
     	Long[] arr = new Long[n + 1];
-//    	
-////    	Prepare parameters
-//    	int pointer = 0;
-//    	int end = 0;
-//    	int num = 0;
-////    	Repeat adding operations
-//    	for(int i = 0; i < queries.size(); i++) {
-//    		 pointer = queries.get(i).get(0) - 1;
-//    		 end = queries.get(i).get(1) - 1;
-//    		 num = queries.get(i).get(2);
-//    		 for(; pointer <= end; pointer++) {
-//    			 if(arr[pointer] == null)
-//        			 arr[pointer] = (long)num;
-//    			 else if(arr[pointer] != null)
-//    			 arr[pointer] += num;
-//    			     		 }
-//    	}
-//    	
-//    	for(int i = 0; i < n; i++) {
-//    		if(arr[i] != null) {
-//    		if(arr[i] > max) max = arr[i];}
-//    	}
 
-//    	after reading editorial
+//    	Define variables for start, end and adding number of an operation.
     	int start = 0;
     	int end = 0;
     	int num = 0;
     	
+//    	For each operation, add the number to values of the array.
     	for(int i = 0; i < queries.size(); i++) {
 		 start = queries.get(i).get(0) - 1;
 		 end = queries.get(i).get(1) - 1;
@@ -82,6 +66,7 @@ class ResultArrayManipulation {
    			 arr[i] = arr[i - 1];
     	}
     	
+//    	Find the max value
     	for(int i = 0; i < n; i++) {
 		if(arr[i] != null) {
 		if(arr[i] > max) max = arr[i];}

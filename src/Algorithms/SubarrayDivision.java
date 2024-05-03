@@ -25,6 +25,7 @@ class ResultSubarrayDivision {
     public static int birthday(List<Integer> s, int d, int m) {
     // Write your code here
     	int count = 0;
+//    	Repeat taking a substring from the top of the array
     	for(int i = 0; i < s.size() - m + 1; i++) {
     		int sum = 0;
     		for(int c = 0; c < m; c++) {

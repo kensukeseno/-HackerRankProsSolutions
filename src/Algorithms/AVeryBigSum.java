@@ -20,7 +20,9 @@ class ResultAVeryBigSum {
 
     public static long aVeryBigSum(List<Long> ar) {
     // Write your code here
+//    	Prepare a variable in long
     	Long result = (long) 0;
+//    	Repeat adding numbers
     	for(int i = 0; i < ar.size(); i++) {
     		result += ar.get(i);
     	}

@@ -33,18 +33,24 @@ class ResultBirthdayCakeCandles {
 //    		}	
 //    	}
 //    	return count;
+    	
+    	int arrSize = candles.size();
+//    	Prepare a counter to count the number of the tallest candels
+    	int count = 1;
+//    	Prepare a variable to store the tallest value
+    	int tallest = 0;
 
-  	int arrSize = candles.size();
-  	int count = 1;
-  	Integer current = 0;
-  	
-  	for(int i = 0; i < arrSize; i++) {
-  		if(candles.get(i) > current) current = candles.get(i);
-  		else if(candles.get(i).equals(current)) {
+//    	Check every num
+    	for(int i = 0; i < arrSize; i++) {
+    		if(candles.get(i) > tallest) {
+    			tallest = candles.get(i);
+    			count = 1;
+    		}
+    		else if(candles.get(i).equals(tallest)) {
   			count++;
-  		}
-  	}
-  	return count;
+    		}
+    	}
+    	return count;
     }
 
 }

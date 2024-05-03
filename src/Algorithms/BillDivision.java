@@ -21,7 +21,9 @@ class ResultBillDivision {
 
     public static void bonAppetit(List<Integer> bill, int k, int b) {
     // Write your code here
+//    	Calculate the sum
     	int sum = bill.stream().mapToInt(Integer::intValue).sum();
+//    	Calculate  actual ammount Anna needs to pay
     	int bActual = (sum - bill.get(k))/2;
     	
     	if(b == bActual) {

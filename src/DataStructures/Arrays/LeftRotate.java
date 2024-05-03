@@ -25,6 +25,10 @@ class ResultRotateLeft {
     public static List<Integer> rotateLeft(int d, List<Integer> arr) {
     // Write your code here
     	
+    	/*
+    	 * Deduct d from each index of arr.
+    	 * If the index goes negative, go back to the max index of arr instead.
+    	 */
     	List<Integer> result = new ArrayList<>();
     	
     	for(int i = d; i < arr.size(); i++ ) {

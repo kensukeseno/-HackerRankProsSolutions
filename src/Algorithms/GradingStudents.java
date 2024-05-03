@@ -25,10 +25,10 @@ class ResultGradingStudents {
 		//set a round grade to null
 		List<Integer> roundGrades = new ArrayList<>();
 
-		//		repeate oparations for the number of list grades elementse
+		//Repeat operations for the number of list grades elements
 		for(int i = 0; i < grades.size(); i++) {
 			int grade = grades.get(i);
-			//    	no round if grade is less than 40
+			//Round the number if grade is greater than 37 and if the next multiple of  is less than 3
 			if(grade > 37 && grade % 5 >= 3) {
 				roundGrades.add(grade + (5 - grade % 5));
 			}else {

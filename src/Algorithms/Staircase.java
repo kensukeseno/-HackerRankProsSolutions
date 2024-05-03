@@ -14,7 +14,9 @@ class ResultStaircase {
     public static void staircase(int n) {
     // Write your code here
     	for(int i = 0; i < n; i++) {
+//    		Define how many time to print spaces
     		int space = n - (i + 1);
+//    		Define how many times to print #
     		int simbol = i + 1;
     		for(; space > 0; space--) {
     			System.out.print(" ");
@@ -22,6 +24,7 @@ class ResultStaircase {
     		for(; simbol > 0; simbol--) {
     			System.out.print("#");
     		}
+//    		Start a new line
     		System.out.println("");
     	}
 

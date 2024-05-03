@@ -20,11 +20,13 @@ class ResultMiniMaxSum {
 	
     public static void miniMaxSum(List<Integer> arr) {
     // Write your code here
-    	
+//    	Sort arr in an ascending order
     	List<Integer> sortedArr = arr.stream().sorted().collect(Collectors.toList());
 
+//    	Calculate the sum
     	sortedArr.forEach(num -> total += num);
-    	
+   
+//    	Get min and max nums
     	long min = total - sortedArr.get(4);
     	long max = total - sortedArr.get(0);
     	

@@ -22,21 +22,25 @@ class ResultCompareTriplets {
      */
 
     public static List<Integer> compareTriplets(List<Integer> a, List<Integer> b) {
+//    	Prepare a result list
     	List<Integer> result = new ArrayList<>();
+//    	Prepare two variables to store each player's point
     	int aScore = 0;
     	int bScore = 0;
     	
+//    	Compare awarding points 3 times
     	for(int i = 0; i < 3; i++) {
+//    		Player with higher awarding point gets a point
     		if(a.get(i) > b.get(i))
     			aScore++;
     		if(a.get(i) < b.get(i))
     			bScore++;
     	}
+//    	Store players' points in result value
     	result.add(aScore);
     	result.add(bScore);
 
     	return result;
-
     }
 
 }

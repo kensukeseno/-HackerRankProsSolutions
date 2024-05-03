@@ -21,7 +21,10 @@ class Result {
 
 	public static int simpleArraySum(List<Integer> ar) {
     // Write your code here
-    	
+    	/*
+    	 Prepare a variable named sum to add numbers to.
+    	 Take an each value from a given array and add each value to variable sum.
+    	 */
     	ar.forEach(num -> sum += num);
     	return sum;
     	

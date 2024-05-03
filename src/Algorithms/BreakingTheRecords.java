@@ -22,11 +22,14 @@ class ResultBreakingTheRecords {
 
     public static List<Integer> breakingRecords(List<Integer> scores) {
     // Write your code here
+//    	Create variables to show the numbers of breaking max and min records
     	int breakMax = 0;
     	int breakMin = 0;
     	
+//    	Set initial reacords
     	int max = scores.get(0);
     	int min = scores.get(0);
+    	
     	
     	for(int i = 1; i < scores.size(); i++) {
     		if(scores.get(i) > max) {

@@ -25,10 +25,8 @@ class ResultDivisibleSumPairs {
 
     public static int divisibleSumPairs(int n, int k, List<Integer> ar) {
     // Write your code here
-//    	sort array in natural order
-    	ar.sort(Comparator.naturalOrder());
     	int count = 0;
-    	
+//    	 Simulate all possible pairs
     	for(int i = 0; i < ar.size() - 1; i++) {
     		for(int c = 1; i + c < ar.size(); c++) {
     			if((ar.get(i) + ar.get(i + c)) % k == 0){

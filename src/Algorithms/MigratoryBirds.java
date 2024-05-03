@@ -21,28 +21,27 @@ class ResultMigratoryBirds {
      */
 
     public static int migratoryBirds(List<Integer> arr) {
-    // Write your code here
-    	arr.sort(Comparator.naturalOrder());
-    	int maxCount = 0;
-    	int count = 0;
-    	int mostSighted = 0;
-    	int sighted = 0;
+    // Write your code here 	
+//    	Prepare an array with 5 indexes
+    	int[] typeCounter = new int[5];
     	
+//    	Count types of sighted birds
     	for(int i = 0; i < arr.size(); i++) {
-    		if(arr.get(i) == sighted) {
-    			count++;
-    			if(count > maxCount) {
-    				maxCount = count;
-    				mostSighted = sighted;
-    			}
-    		}else {
-    			count = 1;
-    			sighted = arr.get(i);
+    		int id = arr.get(i);
+    		typeCounter[id - 1] += 1;
+    	}
+    	
+//    	Find the id of most sighted birds
+    	int mostSightedTimes = 0;
+    	int mostSightedId = 0;
+    	for(int i = 0; i < 5; i++) {
+    		if(typeCounter[i] > mostSightedTimes) {
+    			mostSightedTimes = typeCounter[i];
+    			mostSightedId = i + 1;
     		}
     	}
-    	return mostSighted;
+    	return mostSightedId;
     }
-
 }
 
 public class MigratoryBirds {

@@ -23,10 +23,13 @@ class ResultSalesByMatch{
 
     public static int sockMerchant(int n, List<Integer> ar) {
     // Write your code here
+//    	Find the max number of color
     	int max = ar.stream().max(Comparator.naturalOrder()).orElseThrow();
     	
+//    	Create an array with the number of max rows 
     	int[] soxByColor = new int[max + 1];
     	
+//    	Count sox by adding 1 on row with index corresponding to color
     	for(int sox: ar) {
     		soxByColor[sox] ++;
     	}

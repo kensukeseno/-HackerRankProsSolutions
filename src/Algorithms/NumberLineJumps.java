@@ -21,17 +21,24 @@ class ResultNumberLineJumps {
 
 	public static String kangaroo(int x1, int v1, int x2, int v2) {
 		// Write your code here
+//		Create variables to show locations of each Kangaroo
 		int location1 = x1;
 		int location2 = x2;
 		
+//		Set a answer variable to "NO" as a default value
 		String ans = "NO";
 		
+//		Anser is "Yes" when starting points are the same
 		if(x1 == x2) {
 			ans = "YES";
 		}
+//		When start point of Kangaroo1 is behind the other one
 		if(x1 < x2) {
+//			If Kangaroo1 jumps furhter
 			if(v1 > v2) {
+//				Repeat the next oparation until Kangaroo1 passes Kangaroo2
 				while(location1 <= location2){
+//					If the positions are the same
 					if(location1 == location2) {
 						ans = "YES";
 						break;
